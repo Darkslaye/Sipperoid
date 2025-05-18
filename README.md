@@ -1,0 +1,2 @@
+# Sipperoid---Discord Bot
+
