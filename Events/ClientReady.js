@@ -1,7 +1,7 @@
 const { Events } = require('discord.js');
 const colors = require('colors');
 const refresher = require('./Refresher.js');
-const config = require('../config.json');
+
 
 function msUntilNext49MinuteMark() {
     const now = new Date();
