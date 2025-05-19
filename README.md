@@ -1,2 +1,1 @@
-# Sipperoid---Discord Bot
-
+# Sipperoid - Discord Bot

@@ -1,9 +1,8 @@
 const { Client, Collection, Events, GatewayIntentBits, REST, Routes } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
+const clashAPI = require('clash-of-clans-api'); // Need to use... Clash of Clans API!
 
-const { QuickDB } = require('quick.db');
-const db = new QuickDB();
 
 const colors = require('colors')
 require('dotenv').config()
@@ -32,7 +31,7 @@ for (const folder of commandFolders) {
 		const command = require(filePath);
 		if ('data' in command && 'execute' in command) {
 			commands.push(command.data.toJSON());
-			client.commands.set(command.data.name, command); // Fix here
+			client.commands.set(command.data.name, command);
 		} else {
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 		}
@@ -44,9 +43,9 @@ const rest = new REST().setToken(process.env.TOKEN_DISCORD);
 (async () => {
     const isActivated = true; // If set to false, any deletion will not be triggered.
     const forGuild = true; // Set to false if UPDATE is FULLY PATCHED!
-    let data;
+    let data; // Data to be used for the commands.
 
-    if (!isActivated) {
+    if (!isActivated) { 
         return;
     } else {
         try {

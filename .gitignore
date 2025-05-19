@@ -1,3 +1,6 @@
 Database/
 src/
 .env
+node_modules/
+package.json
+package-lock.json
