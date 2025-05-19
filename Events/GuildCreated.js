@@ -1,7 +1,6 @@
 const { Events } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-
 const colors = require('colors');
 
 module.exports = {
@@ -29,7 +28,7 @@ module.exports = {
         }
 
         // There's certain data we don't want deleted.
-        
+
 
     },
 };

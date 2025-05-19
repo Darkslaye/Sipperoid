@@ -22,9 +22,10 @@ module.exports = {
     name: Events.ClientReady,
     once: true,
     async execute(client) {
-        console.log(`Ready! Logged in as ${client.user.tag}`.blue);
+        console.log(`Logged in as ${client.user.tag}`.green);
         client.user.setStatus("idle")
         client.user.setPresence({ activities: [{ name: 'The Dev Phase' }], status: 'idle' });
+
 
         await refresher(client); // Initial run.
         setTimeout(() => { // Wait until the next 4 or 9 minute mark to start.
