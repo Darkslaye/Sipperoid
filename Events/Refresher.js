@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const timeUtil = require('../timeUtil'); // Add this at the top with your other requires
+const timeUtil = require('../timeUtil');
 
 const refresher = async (client) => {
 
