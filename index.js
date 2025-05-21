@@ -1,7 +1,7 @@
 const { Client, Collection, Events, GatewayIntentBits, REST, Routes } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-const clashAPI = require('clash-of-clans-api'); // Need to use... Clash of Clans API!
+// const clashAPI = require('clash-of-clans-api'); // Need to use... Clash of Clans API!
 
 const colors = require('colors')
 
@@ -125,7 +125,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
 });
 
-// ----- Events Handling ------
+// ----- Events Handling -----
 const eventsPath = path.join(__dirname, 'Events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
