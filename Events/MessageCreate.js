@@ -8,14 +8,12 @@ module.exports = {
     once: false,
     async execute(message) {
         if (message.author.bot) return;
-        if (message.content != 'water') return;
+        if (message.content != 'Create Voice Channel') return;
 
         // This is a developer command. Only the developer can use this command.
-        if (message.author.id != '622532185731366932') {
-            console.log('This command is restricted to developers.')
-            await message.reply('This command is restricted to developers.', { ephemeral: false });
-            return;
-        }
+        if (message.author.id != '622532185731366932') return;
+
+        message.reply('Creating voice channels...')
 
         const createVoiceChannel = async (name) => {
             const newChannel = await message.guild.channels.create({

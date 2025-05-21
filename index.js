@@ -3,8 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const clashAPI = require('clash-of-clans-api'); // Need to use... Clash of Clans API!
 
-
 const colors = require('colors')
+
 require('dotenv').config()
 
 
@@ -42,7 +42,7 @@ const rest = new REST().setToken(process.env.TOKEN_DISCORD);
 
 (async () => {
     const isActivated = true; // If set to false, any deletion will not be triggered.
-    const forGuild = true; // Set to false if UPDATE is FULLY PATCHED!
+    const forGuild = false; // Set to false if UPDATE is FULLY PATCHED!
     let data; // Data to be used for the commands.
 
     if (!isActivated) { 

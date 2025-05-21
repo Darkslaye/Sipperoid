@@ -3,9 +3,6 @@ const path = require('node:path');
 const timeUtil = require('../timeUtil');
 
 const refresher = async (client) => {
-
-    console.log("Updating timers...");
-
     try {
         const databasePath = path.join(__dirname, '../Database/Server');
         const files = fs.readdirSync(databasePath);
@@ -101,7 +98,7 @@ const refresher = async (client) => {
             // Do here
             if (EndofSeason) {
                 const eosMs = timeUtil.getTimeUntilEndingEoS();
-                const eosName = `EoS ends in ${formatTime(eosMs)}`;
+                const eosName = `🛡️ EoS ends in ${formatTime(eosMs)}`;
                 await renameChannel(EndofSeason, eosName, guild, guildId, filePath, serverData);
             }
 
@@ -110,10 +107,10 @@ const refresher = async (client) => {
                 const raidEndMs = timeUtil.getTimeUntilEndingRaid();
                 let raidName, inRaid;
                 if (raidStartMs > 0 && raidStartMs < raidEndMs) {
-                    raidName = `Raid starts in ${formatTime(raidStartMs)}`;
+                    raidName = `💥 Raid starts in ${formatTime(raidStartMs)}`;
                     inRaid = false;
                 } else {
-                    raidName = `Raid ends in ${formatTime(raidEndMs)}`;
+                    raidName = `💥 Raid ends in ${formatTime(raidEndMs)}`;
                     inRaid = true;
                 }
                 await renameChannel(Raid, raidName, guild, guildId, filePath, serverData);
@@ -124,10 +121,10 @@ const refresher = async (client) => {
                 const cwlEndMs = timeUtil.getTimeUntilEndingCWL();
                 let cwlName, inCWL;
                 if (cwlStartMs > 0 && cwlStartMs < cwlEndMs) {
-                    cwlName = `CWL starts in ${formatTime(cwlStartMs)}`;
+                    cwlName = `🏆 CWL starts in ${formatTime(cwlStartMs)}`;
                     inCWL = false;
                 } else {
-                    cwlName = `CWL ends in ${formatTime(cwlEndMs)}`;
+                    cwlName = `🏆 CWL ends in ${formatTime(cwlEndMs)}`;
                     inCWL = true;
                 }
                 await renameChannel(ClanWarLeague, cwlName, guild, guildId, filePath, serverData);

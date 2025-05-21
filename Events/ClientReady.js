@@ -24,7 +24,7 @@ module.exports = {
     async execute(client) {
         console.log(`Logged in as ${client.user.tag}`.green);
         client.user.setStatus("idle")
-        client.user.setPresence({ activities: [{ name: 'The Dev Phase' }], status: 'idle' });
+        client.user.setPresence({ activities: [{ name: 'Sippin\' Juice Boxes' }], status: 'online' });
 
 
         await refresher(client); // Initial run.
