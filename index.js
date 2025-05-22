@@ -7,7 +7,6 @@ const colors = require('colors')
 
 require('dotenv').config()
 
-
 const client = new Client({ 
     intents: [
         GatewayIntentBits.Guilds,
@@ -16,6 +15,7 @@ const client = new Client({
     ] 
 });
 
+// ----- Command Handler -----
 const commands = [];
 
 client.commands = new Collection();
@@ -40,6 +40,7 @@ for (const folder of commandFolders) {
 
 const rest = new REST().setToken(process.env.TOKEN_DISCORD);
 
+// Remove unnecessary code given finalized build.
 (async () => {
     const isActivated = true; // If set to false, any deletion will not be triggered.
     const forGuild = false; // Set to false if UPDATE is FULLY PATCHED!
@@ -99,18 +100,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
         console.error(`No command matching ${interaction.commandName} was found.`);
         await interaction.reply({
             content: 'This command is not available.',
-            ephemeral: true, // Use flags: 64 if necessary
-        }).catch(console.error); // Handle errors properly
+            ephemeral: true, // Use flags: 64 if necessary.
+        }).catch(console.error); // Handle errors properly.
         return;
     }
 
     try {
-        // Execute the command
+        // Execute the command.
         await command.execute(interaction);
     } catch (error) {
         console.error(`Error executing command ${interaction.commandName}:`, error);
 
-        // Handle already acknowledged interactions
+        // Handle already acknowledged interactions.
         if (interaction.replied || interaction.deferred) {
             await interaction.followUp({
                 content: 'There was an error while executing this command.',
