@@ -9,7 +9,7 @@ module.exports = {
         .setDescription('View the bot\'s information.'),
     async execute(interaction) {
         try {
-            // Random footer messages
+            // Array for randomized Footer Messages
             const footerMessages = [
                 "🧃 Hydrated by juice boxes!",
                 "🧃 Hydration level: 87%",
@@ -19,7 +19,7 @@ module.exports = {
                 "🧃 Crafted with Love and Juice!"
             ];
 
-            // Stat Variables
+            // Statistics for API and uptime data.
             const msgPing = Date.now() - interaction.createdTimestamp;
             const apiPing = interaction.client.ws.ping;
             const uptimeSeconds = Math.floor(process.uptime());
