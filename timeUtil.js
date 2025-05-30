@@ -2,7 +2,6 @@ const MS_PER_MINUTE = 60 * 1000;
 const MS_PER_HOUR = 60 * MS_PER_MINUTE;
 const MS_PER_DAY = 24 * MS_PER_HOUR;
 
-// Get next occurrence of a weekday at a specific hour/minute of UTC.
 function getNextWeekdayTime(weekday, hourUTC, minuteUTC = 0) {
     const now = new Date();
     let result = new Date(Date.UTC(
@@ -20,14 +19,12 @@ function getNextWeekdayTime(weekday, hourUTC, minuteUTC = 0) {
     return result;
 }
 
-// Get next occurrence of a day of month at a specific hour/minute - UTC.
 function getNextMonthDayTime(day, hourUTC, minuteUTC = 0) {
     const now = new Date();
     let year = now.getUTCFullYear();
     let month = now.getUTCMonth();
     let result = new Date(Date.UTC(year, month, day, hourUTC, minuteUTC, 0, 0));
     if (result <= now) {
-        // Move to next month
         month += 1;
         if (month > 11) {
             month = 0;
@@ -38,12 +35,10 @@ function getNextMonthDayTime(day, hourUTC, minuteUTC = 0) {
     return result;
 }
 
-// Get last Monday of the month at a specific hour/minute (UTC)
 function getLastMondayOfMonth(hourUTC, minuteUTC = 0) {
     const now = new Date();
     let year = now.getUTCFullYear();
     let month = now.getUTCMonth();
-    // Get last day of this month
     let lastDay = new Date(Date.UTC(year, month + 1, 0, hourUTC, minuteUTC, 0, 0));
     let day = lastDay.getUTCDay();
     let diff = (day >= 1) ? day - 1 : 6; 
@@ -58,37 +53,43 @@ function getTimeUntilNextRaid() {
 }
 
 function getTimeUntilNextCWL() {
-    // 1st of every month at 8 am UTC
     const nextCWL = getNextMonthDayTime(1, 8, 0);
     return nextCWL - new Date();
 }
 
 function getTimeUntilEndingEoS() {
-    // Last Monday of every month at 5 am UTC
-    const eos = getLastMondayOfMonth(5, 0);
-    if (eos > new Date()) {
-        return eos - new Date();
-    } else {
-        // Move to next month
-        let year = eos.getUTCFullYear();
-        let month = eos.getUTCMonth() + 1;
-        if (month > 11) {
-            month = 0;
-            year += 1;
-        }
-        const nextEos = getLastMondayOfMonth(5, 0, year, month);
-        return nextEos - new Date();
+    const now = new Date();
+    const year = now.getUTCFullYear();
+    const month = now.getUTCMonth();
+    const lastDayOfMonth = new Date(Date.UTC(year, month + 1, 0));
+
+    let lastMonday = new Date(lastDayOfMonth);
+    while (lastMonday.getUTCDay() !== 1) {
+        lastMonday.setUTCDate(lastMonday.getUTCDate() - 1);
     }
+
+    lastMonday.setUTCHours(5, 0, 0, 0);
+
+    if (now > lastMonday) {
+        const nextMonth = new Date(Date.UTC(year, month + 1, 1));
+        const nextMonthLastDay = new Date(Date.UTC(nextMonth.getUTCFullYear(), nextMonth.getUTCMonth() + 1, 0));
+        let nextLastMonday = new Date(nextMonthLastDay);
+        while (nextLastMonday.getUTCDay() !== 1) {
+            nextLastMonday.setUTCDate(nextLastMonday.getUTCDate() - 1);
+        }
+        nextLastMonday.setUTCHours(5, 0, 0, 0);
+        return nextLastMonday - now;
+    }
+
+    return lastMonday - now;
 }
 
 function getTimeUntilEndingRaid() {
-    // 2 am Monday Central Time = 7 am Monday UTC (during DST)
-    const nextRaidEnd = getNextWeekdayTime(1, 7, 0); // 1 = Monday
+    const nextRaidEnd = getNextWeekdayTime(1, 7, 0);
     return nextRaidEnd - new Date();
 }
 
 function getTimeUntilEndingCWL() {
-    // 10th of every month at 8 am UTC
     const nextCwlEnd = getNextMonthDayTime(10, 8, 0);
     return nextCwlEnd - new Date();
 }

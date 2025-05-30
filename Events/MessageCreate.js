@@ -10,10 +10,7 @@ module.exports = {
         if (message.author.bot) return;
         if (message.content != 'Create Voice Channel') return;
 
-        // This is a developer command. Only the developer can use this command.
         if (message.author.id != '622532185731366932') return;
-
-        message.reply('Creating voice channels...')
 
         const createVoiceChannel = async (name) => {
             const newChannel = await message.guild.channels.create({
@@ -60,10 +57,11 @@ module.exports = {
             ClanWarLeague: clanWarLeagueChannelId
         };
 
+        // 
+        if (!serverData.Settings) serverData.Settings = {};
         serverData.Settings.ClashofClans = ClashofClansData;
-        // Save the updated data back to the file.
-        fs.writeFileSync(filePath, JSON.stringify(serverData, null, 4));
 
+        fs.writeFileSync(filePath, JSON.stringify(serverData, null, 4));
         console.log('Server information has been updated.');
 
         // Is the server active?
