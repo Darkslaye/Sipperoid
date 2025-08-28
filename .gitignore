@@ -1,5 +1,4 @@
 Database/
-src/
 .env
 node_modules/
 package.json

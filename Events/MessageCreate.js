@@ -1,4 +1,4 @@
-const { Events, ChannelType, PermissionsBitField, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
+const { Events, ChannelType, PermissionsBitField, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
 const colors = require('colors');
@@ -8,6 +8,39 @@ module.exports = {
     once: false,
     async execute(message) {
         if (message.author.bot) return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if (message.content != 'Create Voice Channel') return;
 
         if (message.author.id != '622532185731366932') return;

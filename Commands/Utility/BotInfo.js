@@ -1,5 +1,6 @@
+// Needs to be fixed.
+
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
-const embeds = require('../../src/embeds.json');
 const colors = require('colors');
 require('dotenv').config();
 
@@ -23,18 +24,18 @@ module.exports = {
             const msgPing = Date.now() - interaction.createdTimestamp;
             const apiPing = interaction.client.ws.ping;
             const uptimeSeconds = Math.floor(process.uptime());
-            const uptimeString = [ // Formats the uptime to "Xh Ym Zs"
+            const uptimeString = [
                 Math.floor(uptimeSeconds / 3600) + "h",
                 Math.floor((uptimeSeconds % 3600) / 60) + "m",
                 (uptimeSeconds % 60) + "s"
-            ].join(" "); // Joins the array into a string.
+            ].join(" ");
 
             const BotEmbed = new EmbedBuilder()
                 .setAuthor({
                     name: interaction.client.user.username,
                     iconURL: interaction.client.user.displayAvatarURL({ dynamic: true })
                 })
-                .setColor(embeds.default.color)
+                .setColor("#FF3B3B") // Hardcoded color
                 .setThumbnail(interaction.client.user.displayAvatarURL({ dynamic: true }))
                 .setDescription(
                     "**Howdy!** I'm Sipperoid, your juice-powered Discord bot!\n" +
@@ -90,10 +91,9 @@ module.exports = {
         } catch (err) {
             console.error('Error in /info command:'.red, err);
             const errorEmbed = new EmbedBuilder()
-                .setTitle(embeds.error.title)
-                .setColor(embeds.error.color)
-                .setDescription(embeds.error.description)
-                .setFooter({ text: embeds.error.footer });
+                .setTitle("Error")
+                .setColor("Red")
+                .setDescription("An error occurred while executing the command.\nError has been reported.");
 
             if (interaction.replied || interaction.deferred) {
                 await interaction.followUp({ embeds: [errorEmbed], ephemeral: true });

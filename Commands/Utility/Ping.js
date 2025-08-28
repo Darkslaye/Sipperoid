@@ -10,20 +10,22 @@ module.exports = {
 		try {
 			const msgPing = Date.now() - interaction.createdTimestamp;
         	const apiPing = interaction.client.ws.ping;
-
 			const PingEmbed = new EmbedBuilder()
 				.setTitle(`Pong!`)
-				.setColor(embeds.default.color)
+				.setColor("#893BFF")
 				.setDescription(`API Latency is **${apiPing}ms.**\nMessage Latency is **${msgPing}ms.**`)
 			await interaction.reply({ embeds: [PingEmbed] })
 		} catch (err) {
 			console.error('Error sending embeded response:'.red, err);
 			const PingEmbedError = new EmbedBuilder()
-				.setTitle(embeds.error.title)
-				.setColor(embeds.error.color)
-				.setDescription(embeds.error.description)
-				.setFooter({ text: embeds.error.footer })
-			await interaction.reply({ embeds: [PingEmbedError] })
+				.setTitle("Error")
+				.setColor("Red")
+				.setDescription("An error occurred while executing the command.\nError has been reported.")
+				.setFooter({ text: "Please try again later. . ." })
+			await interaction.reply({ embeds: [PingEmbedError], ephemeral: true });
 		}
-	}
-}
+	},
+};
+
+// This will not work. 
+// Update the code.
